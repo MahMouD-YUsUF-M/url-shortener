@@ -79,7 +79,7 @@ POST /v1/url
 
 ---
 
-## Get  Urls
+## Get  Url info
 
 - This API returns basic information about any short URL
 
@@ -105,7 +105,7 @@ GET /v1/info/urls/{code}
 ### Path Parameters For Specific url
 | Parameter |  Type  | Required |      Description       |
 |:---------:|:------:|:--------:|:----------------------:|
-|   code    | String |   Yes    | Unique code of the url |
+|   url_code    | String |   Yes    | Unique code of the url |
 
 ### Response
 
