@@ -89,9 +89,6 @@ POST /v1/urls
 ```http request
 GET /v1/urls
 ```
-
-
-```
 ### Path Parameters
 
 | Parameter  |  Type  | Required |       Description       |
@@ -113,13 +110,13 @@ GET /v1/urls
     {
       "code": "fx82nk",
       "target_url": "www.google.com",
-      "expires_at": "9/16/2025, 2:48:30 PM",
+      "expires_at": "9/16/2025T2:48:30",
       "clicks": 1
     },
     {
       "code": "dsg33asf",
       "target_url": "www.atcoder.com",
-      "expires_at": "9/12/2025, 2:38:31 PM",
+      "expires_at": "9/12/2025T2:38:31",
       "clicks": 6
     }
   ]
@@ -158,10 +155,10 @@ GET /v1/urls/{code}
 |   code    | String |   Yes    | Unique code of the url |
 
 ### Response
-
 HTTP/1.1 302 Found
+
 Location: https://example.com/dashboard
-### Error Response
+
 
 
 ```json
