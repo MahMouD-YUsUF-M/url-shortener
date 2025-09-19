@@ -28,7 +28,7 @@ The following header parameters are required across all APIs:
 ### Endpoint
 
 ```http request
-POST /v1/url
+POST /v1/urls
 ```
 
 ### Request Body Parameters
@@ -54,7 +54,7 @@ POST /v1/url
   "message": "Url shortening done!",
   "data": {
     "url_code": "fx82nk",
-    "expires_at": "9/16/2025, 2:48:30 PM"
+    "expires_at": "9/16/2025T2:48:30"
   }
 }
 ```
@@ -87,13 +87,10 @@ POST /v1/url
 ### End Point
 
 ```http request
-GET /v1/info/urls
+GET /v1/urls
 ```
 
-##### For Specific url
 
-```http request
-GET /v1/info/urls/{code}
 ```
 ### Path Parameters
 
@@ -101,11 +98,6 @@ GET /v1/info/urls/{code}
 |:----------:|:------:|:--------:|:-----------------------:|
 |  url_code  | String |    No    | Unique code of the  url |
 
-
-### Path Parameters For Specific url
-| Parameter |  Type  | Required |      Description       |
-|:---------:|:------:|:--------:|:----------------------:|
-|   url_code    | String |   Yes    | Unique code of the url |
 
 ### Response
 
@@ -134,35 +126,7 @@ GET /v1/info/urls/{code}
 }
 ```
 
-#### For specific url
 
-```json
-{
-  "success": true,
-  "code": 200,
-  "message": "",
-  "data": [
-    {
-      "code": "fx82nk",
-      "target_url": "www.google.com",
-      "expires_at": "9/16/2025, 2:48:30 PM",
-      "clicks": 1
-    }
-  ]
-}
-```
-
-### Error Response
-
-#### For specific url
-
-```json
-{
-  "success": false,
-  "code": 403,
-  "message": "Sorry, url not found"
-}
-```
 
 
 ### Error Response
@@ -186,7 +150,7 @@ GET /v1/info/urls/{code}
 ### Endpoint
 
 ```http request
-GET /v1/url/{code}
+GET /v1/urls/{code}
 ```
 ### Path Parameters
 | Parameter |  Type  | Required |      Description       |
@@ -195,18 +159,8 @@ GET /v1/url/{code}
 
 ### Response
 
-```json
-{
-  "success": true,
-  "code": 302,
-  "message": "",
-  "data": [
-   {
-   "target_url": "https://www.google.com"
-   }
-  ]
-}
-```
+HTTP/1.1 302 Found
+Location: https://example.com/dashboard
 ### Error Response
 
 
