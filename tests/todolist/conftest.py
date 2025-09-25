@@ -2,25 +2,25 @@ import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
-def engine_todolist():
-    import libtodolist
+def engine_urlshortner():
+    import liburlshortner
 
-    engine = libtodolist.data.engine_todolist
-    assert engine.url.database == f'todolist'
+    engine = liburlshortner.data.engine_urlshortner
+    assert engine.url.database == f'urlshortner'
 
-    libtodolist.data.models.tables.create_all()
+    liburlshortner.data.models.tables.create_all()
 
     return engine
 
 
 @pytest.fixture(scope="session")
-def data_todolist(engine_todolist):
+def data_urlshortner(engine_urlshortner):
     pass
 
 
 @pytest.fixture(scope="session", autouse=True)
-def app_todolist(data_todolist):
+def app_urlshortner(data_urlshortner):
     from fastapi.testclient import TestClient
-    from apptodolist.web import app
+    from appurlshortner.web import app
 
     return TestClient(app)

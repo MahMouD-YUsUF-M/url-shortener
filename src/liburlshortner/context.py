@@ -4,14 +4,14 @@ from libutil.util import BaseModel
 
 
 class RequestContext(BaseModel):
-    # todolist service context attributes
+    # urlshortner service context attributes
     id_user: Optional[int] = None
     user_code: str = None
 
     @staticmethod
-    def from_todolist_service(user_code, **kwargs):
+    def from_urlshortner_service(user_code, **kwargs):
         """
-        Creates a RequestContext for requests coming from the todolist service.
+        Creates a RequestContext for requests coming from the urlshortner service.
         Add more service-specific factory methods as needed:
         - from_auth_service()
         - from_payment_service()
@@ -19,11 +19,11 @@ class RequestContext(BaseModel):
         etc.
         """
 
-        from libtodolist.data import engine_todolist, entities
+        from liburlshortner.data import engine_urlshortner, entities
 
-        id_user = entities.user.get_id_by_code(engine_todolist, user_code)
+        id_user = entities.user.get_id_by_code(engine_urlshortner, user_code)
         if not id_user:
-            id_user = entities.user.insert_user(engine_todolist, user_code)
+            id_user = entities.user.insert_user(engine_urlshortner, user_code)
 
         kwargs.update(
             {

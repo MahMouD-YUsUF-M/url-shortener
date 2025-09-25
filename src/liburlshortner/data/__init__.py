@@ -1,5 +1,5 @@
 from libutil.engines import get_engine
 
-engine_todolist = get_engine('todolist')
+engine_urlshortner = get_engine('urlshortner')
 
 from . import models

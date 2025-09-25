@@ -1,6 +1,6 @@
 from typing import List
 
-from libtodolist.messages.common import ResponseBaseModel
+from liburlshortner.messages.common import ResponseBaseModel
 from libutil.util import BaseModel
 
 

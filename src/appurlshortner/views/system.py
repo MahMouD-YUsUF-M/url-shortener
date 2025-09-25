@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from libtodolist.messages.common import ResponseBaseModel
+from liburlshortner.messages.common import ResponseBaseModel
 
 router = APIRouter()
 

@@ -1,7 +1,7 @@
 from fastapi import Header, Request
 from fastapi.exceptions import HTTPException
 
-from libtodolist.context import RequestContext
+from liburlshortner.context import RequestContext
 
 
 def get_request_context(
@@ -11,7 +11,7 @@ def get_request_context(
         include_in_schema=True,
     )
 ):
-    return RequestContext.from_todolist_service(user_code=user_code)
+    return RequestContext.from_urlshortner_service(user_code=user_code)
 
 
 def get_some_header(required: bool = True):

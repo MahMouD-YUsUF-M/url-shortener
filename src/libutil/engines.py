@@ -35,7 +35,7 @@ def define_engines():
 
 def define_engines_dev():
     create_engine('test', 'mysql+mysqldb://root:root@mysqldb:3306/')
-    create_engine('todolist', 'mysql+mysqldb://root:root@mysqldb:3306/todolist')
+    create_engine('urlshortner', 'mysql+mysqldb://root:root@mysqldb:3306/urlshortner')
 
 
 if util.IS_DEV:

@@ -10,8 +10,8 @@ from sqlalchemy.exc import DatabaseError
 from sqlalchemy.exc import IntegrityError, OperationalError
 from starlette.responses import JSONResponse
 
-from libtodolist.exceptions import ServerException, ClientException
-from libtodolist.messages.common import ErrorResponse
+from liburlshortner.exceptions import ServerException, ClientException
+from liburlshortner.messages.common import ErrorResponse
 
 
 def generate_custom_exception_handler(
