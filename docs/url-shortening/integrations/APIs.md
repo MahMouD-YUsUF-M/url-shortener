@@ -1,4 +1,4 @@
-# Shortening service APIs
+# Shortening Service APIs
 
 ---
 
