@@ -54,7 +54,8 @@ class Url(Model):
 
     target_url = sa.Column(sa.String(255), nullable=False,index=True)
     id_user = sa.Column(sa.Integer,nullable=False,index=True)
-    expires_at = sa.Column(types.TIMESTAMP,nullable=False,index=True)
+    expires_at = sa.Column(types.TIMESTAMP,server_default=text('CURRENT_TIMESTAMP + INTERVAL 30 DAY'),
+                           nullable=False,index=True)
 
     created_at = sa.Column(types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'),
                            nullable=False, index=True)
