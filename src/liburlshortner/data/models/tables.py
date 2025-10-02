@@ -76,6 +76,5 @@ class Click(Model):
     updated_at = sa.Column(
         types.TIMESTAMP,
         server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-        nullable=False,
-        index=True,
+        nullable=False
     )
