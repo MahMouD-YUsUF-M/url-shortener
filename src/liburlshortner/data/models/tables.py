@@ -1,10 +1,7 @@
-import sqlalchemy as sa
-from sqlalchemy import text, types
-from sqlalchemy.dialects import mysql
-from sqlalchemy.ext.declarative import declarative_base
-
 from liburlshortner.data import engine_urlshortner
 from libutil import util
+from sqlalchemy.dialects import mysql
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -31,5 +28,3 @@ INT = mysql.INTEGER(unsigned=True)
 BIGINT = mysql.BIGINT(unsigned=True)
 SINT = mysql.INTEGER(unsigned=False)
 SBIGINT = mysql.BIGINT(unsigned=False)
-
-
