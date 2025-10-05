@@ -35,7 +35,7 @@ SBIGINT = mysql.BIGINT(unsigned=False)
 class User(Model):
     __tablename__ = 'user'
 
-    id_user = sa.Column(sa.BIGINT, primary_key=True)
+    id_user = sa.Column(BIGINT, primary_key=True)
     user_code = sa.Column(sa.String(50), nullable=False, unique=True)
     is_guest = sa.Column(sa.Boolean, nullable=False, server_default=sa.sql.expression.true())
 
@@ -50,11 +50,11 @@ class User(Model):
 
 class Url(Model):
     __tablename__ = 'url'
-    id_url = sa.Column(sa.BIGINT, primary_key=True)
+    id_url = sa.Column(BIGINT, primary_key=True)
     url_code = sa.Column(sa.String(7), nullable=False, unique=True)
 
     target_url = sa.Column(sa.String(255), nullable=False, index=True)
-    id_user = sa.Column(sa.BIGINT, nullable=False, index=True)
+    id_user = sa.Column(BIGINT, nullable=False, index=True)
     expires_at = sa.Column(
         types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP + INTERVAL 30 DAY'), nullable=False, index=True
     )
@@ -70,8 +70,8 @@ class Url(Model):
 
 class Click(Model):
     __tablename__ = 'click'
-    id_click = sa.Column(sa.BIGINT, primary_key=True)
-    id_url = sa.Column(sa.BIGINT, nullable=False, index=True)
+    id_click = sa.Column(BIGINT, primary_key=True)
+    id_url = sa.Column(BIGINT, nullable=False, index=True)
     created_at = sa.Column(types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'), nullable=False, index=True)
     updated_at = sa.Column(
         types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'), nullable=False

@@ -4,14 +4,13 @@ import typing
 from fastapi.exceptions import HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.requests import Request
+from liburlshortner.exceptions import ServerException, ClientException
+from liburlshortner.messages.common import ErrorResponse
 from pydantic import ValidationError as ResponseValidationError
 from requests.exceptions import RequestException
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.exc import IntegrityError, OperationalError
 from starlette.responses import JSONResponse
-
-from liburlshortner.exceptions import ServerException, ClientException
-from liburlshortner.messages.common import ErrorResponse
 
 
 def generate_custom_exception_handler(
