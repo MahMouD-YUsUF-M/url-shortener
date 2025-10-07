@@ -2,25 +2,25 @@ import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
-def engine_urlshortner():
-    import liburlshortner
+def engine_urlshortener():
+    import liburlshortener
 
-    engine = liburlshortner.data.engine_urlshortner
-    assert engine.url.database == f'urlshortner'
+    engine = liburlshortener.data.engine_urlshortener
+    assert engine.url.database == f'urlshortener'
 
-    liburlshortner.data.models.tables.create_all()
+    liburlshortener.data.models.tables.create_all()
 
     return engine
 
 
 @pytest.fixture(scope="session")
-def data_urlshortner(engine_urlshortner):
+def data_urlshortener(engine_urlshortener):
     pass
 
 
 @pytest.fixture(scope="session", autouse=True)
-def app_urlshortner(data_urlshortner):
+def app_urlshortener(data_urlshortener):
     from fastapi.testclient import TestClient
-    from appurlshortner.web import app
+    from appurlshortener.web import app
 
     return TestClient(app)
