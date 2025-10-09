@@ -37,7 +37,7 @@ class User(Model):
 
     id_user = sa.Column(BIGINT, primary_key=True)
     user_code = sa.Column(sa.String(50), nullable=False, unique=True)
-    is_guest = sa.Column(sa.Boolean, nullable=False, server_default=sa.sql.expression.true())
+    is_guest = sa.Column(sa.Boolean, nullable=False)
 
     created_at = sa.Column(types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'), nullable=False)
 
@@ -53,11 +53,9 @@ class Url(Model):
     id_url = sa.Column(BIGINT, primary_key=True)
     url_code = sa.Column(sa.String(7), nullable=False, unique=True)
 
-    target_url = sa.Column(sa.String(255), nullable=False, index=True)
+    target_url = sa.Column(sa.Text(), nullable=False, index=True)
     id_user = sa.Column(BIGINT, nullable=False, index=True)
-    expires_at = sa.Column(
-        types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP + INTERVAL 30 DAY'), nullable=False, index=True
-    )
+    expires_at = sa.Column(types.TIMESTAMP, nullable=False, index=True)
 
     created_at = sa.Column(types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'), nullable=False, index=True)
 
