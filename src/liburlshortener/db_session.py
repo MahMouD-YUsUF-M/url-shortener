@@ -1,8 +1,8 @@
-from liburlshortener.data import engine_urlshortener
+from liburlurl_shortener.data import engine_urlurl_shortener
 from libutil.db_session import Session
 
 
-class UrlshortenerSession(Session):
+class Urlurl_shortenerSession(Session):
 
     def __init__(self, **kwargs):
-        super().__init__(engine=engine_urlshortener**kwargs)
+        super().__init__(engine=engine_urlurl_shortener**kwargs)

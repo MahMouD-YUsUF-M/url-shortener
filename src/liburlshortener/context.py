@@ -9,7 +9,7 @@ class RequestContext(BaseModel):
     user_code: str = None
 
     @staticmethod
-    def from_urlshortener_service(user_code, **kwargs):
+    def from_urlurl_shortener_service(user_code, **kwargs):
         """
         Creates a RequestContext for requests coming from the url_shortener service.
         Add more service-specific factory methods as needed:
@@ -19,11 +19,11 @@ class RequestContext(BaseModel):
         etc.
         """
 
-        from liburlshortener.data import engine_urlshortener, entities
+        from liburlurl_shortener.data import engine_urlurl_shortener, entities
 
-        id_user = entities.user.get_id_by_code(engine_urlshortener, user_code)
+        id_user = entities.user.get_id_by_code(engine_urlurl_shortener, user_code)
         if not id_user:
-            id_user = entities.user.insert_user(engine_urlshortener, user_code)
+            id_user = entities.user.insert_user(engine_urlurl_shortener, user_code)
 
         kwargs.update(
             {

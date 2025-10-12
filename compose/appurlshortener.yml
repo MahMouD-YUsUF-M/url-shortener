@@ -1,14 +1,14 @@
 services:
-  appurlshortener:
+  appurlurl_shortener:
     extends:
       file: ../common-config.yml
       service: standard-service
     ports:
       - "8080:8080"
-    command: [ "uvicorn", "--reload", "--host", "0.0.0.0", "--port", "8080", "appurlshortener.web:app" ]
+    command: [ "uvicorn", "--reload", "--host", "0.0.0.0", "--port", "8080", "appurlurl_shortener.web:app" ]
     environment:
       ENV: "dev"
     develop:
       watch:
         - action: rebuild
-          path: appurlshortener.yml
+          path: appurlurl_shortener.yml

@@ -1,7 +1,7 @@
 name: fastapi-boilerplate
 
 include:
-  - path: compose/appurlshortener.yml
+  - path: compose/appurlurl_shortener.yml
 
 networks:
   shared-network:
