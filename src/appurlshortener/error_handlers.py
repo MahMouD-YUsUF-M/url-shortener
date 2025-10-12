@@ -4,8 +4,8 @@ import typing
 from fastapi.exceptions import HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.requests import Request
-from liburlurl_shortener.exceptions import ServerException, ClientException
-from liburlurl_shortener.messages.common import ErrorResponse
+from liburl_shortener.exceptions import ServerException, ClientException
+from liburl_shortener.messages.common import ErrorResponse
 from pydantic import ValidationError as ResponseValidationError
 from requests.exceptions import RequestException
 from sqlalchemy.exc import DatabaseError

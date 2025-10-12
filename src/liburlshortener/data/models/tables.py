@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from liburlurl_shortener.data import engine_urlurl_shortener
+from liburl_shortener.data import engine_url_shortener
 from libutil import util
 from sqlalchemy import text, types
 from sqlalchemy.dialects import mysql
@@ -9,13 +9,13 @@ Base = declarative_base()
 
 
 def create_all():
-    Base.metadata.create_all(engine_urlurl_shortener)
+    Base.metadata.create_all(engine_url_shortener)
 
 
 def recreate_all():
     assert util.IS_DEV, 'must be dev'
-    Base.metadata.drop_all(engine_urlurl_shortener)
-    Base.metadata.create_all(engine_urlurl_shortener)
+    Base.metadata.drop_all(engine_url_shortener)
+    Base.metadata.create_all(engine_url_shortener)
 
 
 class Model(Base):
