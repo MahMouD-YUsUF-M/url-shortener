@@ -1,4 +1,4 @@
-from liburlshortener.data import engine_urlshortener
+from liburl_shortener.data import engine_url_shortener
 from libutil import util
 from sqlalchemy.dialects import mysql
 from sqlalchemy.ext.declarative import declarative_base
@@ -7,18 +7,18 @@ Base = declarative_base()
 
 
 def create_all():
-    Base.metadata.create_all(engine_urlshortener)
+    Base.metadata.create_all(engine_url_shortener)
 
 
 def recreate_all():
     assert util.IS_DEV, 'must be dev'
-    Base.metadata.drop_all(engine_urlshortener)
-    Base.metadata.create_all(engine_urlshortener)
+    Base.metadata.drop_all(engine_url_shortener)
+    Base.metadata.create_all(engine_url_shortener)
 
 
 class Model(Base):
     __abstract__ = True
-    __bind_key__ = 'urlshortener'
+    __bind_key__ = 'url_shortener'
 
 
 TINYINT = mysql.TINYINT(unsigned=True)

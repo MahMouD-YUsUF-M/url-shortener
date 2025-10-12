@@ -35,7 +35,7 @@ def define_engines():
 
 def define_engines_dev():
     create_engine('test', 'mysql+mysqldb://root:root@mysqldb:3306/')
-    create_engine('urlshortener', 'mysql+mysqldb://root:root@mysqldb:3306/urlshortener')
+    create_engine('url_shortener', 'mysql+mysqldb://root:root@mysqldb:3306/url_shortener')
 
 
 if util.IS_DEV:
