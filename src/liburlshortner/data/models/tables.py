@@ -53,7 +53,7 @@ class Url(Model):
     id_url = sa.Column(BIGINT, primary_key=True)
     url_code = sa.Column(sa.String(7), nullable=False, unique=True)
 
-    target_url = sa.Column(sa.Text(), nullable=False, index=True)
+    target_url = sa.Column(sa.String(2048), nullable=False, index=True)
     id_user = sa.Column(BIGINT, nullable=False, index=True)
     expires_at = sa.Column(types.TIMESTAMP, nullable=False, index=True)
 
