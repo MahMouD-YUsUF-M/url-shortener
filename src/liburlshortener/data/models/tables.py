@@ -20,7 +20,7 @@ def recreate_all():
 
 class Model(Base):
     __abstract__ = True
-    __bind_key__ = 'urlshortener'
+    __bind_key__ = 'url_shortener'
 
 
 TINYINT = mysql.TINYINT(unsigned=True)
