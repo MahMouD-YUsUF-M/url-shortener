@@ -13,13 +13,13 @@ The following header parameters are required across all APIs:
 ---
 ## List of APIs
 
-1. [short  Url](#add-url)
+1. [Shorten Url](#add-url)
 2. [Get Url info](#get-url-info)
 3. [Get Url](#get-url)
 
 
 
-# Short  Url
+# Shorten URL
 
 - This API creates a new short url for the user.
 - The url  must be valid and secure.
@@ -53,7 +53,7 @@ POST /v1/urls
   "code": 200,
   "message": "Url shortening done!",
   "data": {
-    "url_code": "https://short.url/fx82nk",
+    "short_url": "https://short.url/fx82nk",
     "expires_at": "2024-07-30T14:30:00.123456"
   }
 }
@@ -79,12 +79,12 @@ POST /v1/urls
 
 ---
 
-## Get  Url info
+## Get URL Info
 
 - This API returns basic information about any short URL
 
 
-### End Point
+### EndPoint
 
 ```http request
 GET /v1/urls
@@ -103,7 +103,7 @@ GET /v1/urls
   "message": "",
   "data": [
     {
-      "code": "https://short.url/fx82nk",
+      "short_url": "https://short.url/fx82nk",
       "target_url": "www.google.com",
       "expires_at": "2024-07-30T14:30:00.123456",
       "clicks": 1
@@ -135,7 +135,7 @@ GET /v1/urls
 
 
 
-## Get Url
+## Get URL
 
 - This API  visit a short URL and  redirected user to the original website
 
