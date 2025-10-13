@@ -13,16 +13,16 @@ The following header parameters are required across all APIs:
 ---
 ## List of APIs
 
-1. [Shorten Url](#add-url)
-2. [Get Url info](#get-url-info)
-3. [Get Url](#get-url)
+1. [Shorten URL](#add-url)
+2. [Get URL info](#get-url-info)
+3. [Get URL](#get-url)
 
 
 
 # Shorten URL
 
-- This API creates a new short url for the user.
-- The url  must be valid and secure.
+- This API creates a new short URL for the user.
+- The URL must be valid and secure.
 - A unique short code is automatically generated.
 
 ### Endpoint
@@ -51,7 +51,7 @@ POST /v1/urls
 {
   "success": true,
   "code": 200,
-  "message": "Url shortening done!",
+  "message": "URLshortening done!",
   "data": {
     "short_url": "https://short.url/fx82nk",
     "expires_at": "2024-07-30T14:30:00.123456"
@@ -65,7 +65,7 @@ POST /v1/urls
 {
   "success": false,
   "code": 400,
-  "message": "Url must be valid"
+  "message": "URL must be valid"
 }
 ```
 ```json
@@ -161,6 +161,6 @@ Location: https://example.com/dashboard
 {
   "success": false,
   "code": 403,
-  "message": "Sorry, url not found"
+  "message": "Sorry, URL not found"
 }
 ```
