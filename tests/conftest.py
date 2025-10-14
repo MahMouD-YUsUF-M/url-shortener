@@ -16,4 +16,4 @@ def setup_engine_env(*engine_names):
             conn.execute(f'CREATE DATABASE {engine_name}')
 
 
-setup_engine_env('todolist')
+setup_engine_env('url_shortener')

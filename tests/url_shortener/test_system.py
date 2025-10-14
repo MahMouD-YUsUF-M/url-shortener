@@ -1,0 +1,4 @@
+def test_health_check(app_url_shortener):
+    response = app_url_shortener.get('/hc')
+    assert response.status_code == 200
+    assert response.json()['success'] == True
