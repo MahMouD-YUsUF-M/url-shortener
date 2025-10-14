@@ -6,11 +6,12 @@
 
 The following header parameters are required across all APIs:
 
-|  Parameter  |  Type  | Required |           Description           |
-|:-----------:|:------:|:--------:|:-------------------------------:|
-| X-Guest-Code| String |   Yes    | Unique identifier for the guest |
+|  Parameter   |  Type  | Required |           Description           |
+|:------------:|:------:|:--------:|:-------------------------------:|
+| X-Guest-Code | String |   Yes    | Unique identifier for the guest |
 
 ---
+
 ## List of APIs
 
 1. [Shorten URL](#add-url)
@@ -33,9 +34,9 @@ POST /v1/urls
 
 ### Request Body Parameters
 
-| Parameter  |  Type  | Required |           Description            |
-|:----------:|:------:|:--------:|:--------------------------------:|
-| target_url | String |   Yes    |  target_url (must be valid url)  |
+| Parameter  |  Type  | Required |          Description           |
+|:----------:|:------:|:--------:|:------------------------------:|
+| target_url | String |   Yes    | target_url (must be valid url) |
 
 ### Payload
 
@@ -68,6 +69,7 @@ POST /v1/urls
   "message": "URL must be valid"
 }
 ```
+
 ```json
 {
   "success": false,
@@ -75,6 +77,7 @@ POST /v1/urls
   "message": "You reach the limit"
 }
 ```
+
 ---
 
 ---
@@ -89,7 +92,6 @@ POST /v1/urls
 ```http request
 GET /v1/urls
 ```
-
 
 ### Response
 
@@ -118,9 +120,6 @@ GET /v1/urls
 }
 ```
 
-
-
-
 ### Error Response
 
 ```json
@@ -137,17 +136,19 @@ GET /v1/urls
 
 ## Get URL
 
-- This API  visit a short URL and  redirected user to the original website
+- This API visit a short URL and redirected user to the original website
 
 ### Endpoint
 
 ```http request
 GET /v1/{code}
 ```
+
 ### Path Parameters
-|  Parameter   |  Type  | Required |      Description      |
-|:------------:|:------:|:--------:|:---------------------:|
-|   url_code   | String |   Yes    | Unique code of the url|
+
+| Parameter |  Type  | Required |      Description       |
+|:---------:|:------:|:--------:|:----------------------:|
+| url_code  | String |   Yes    | Unique code of the url |
 
 ### Response
 
@@ -155,6 +156,7 @@ GET /v1/{code}
 HTTP/1.1 302 Found
 Location: https://example.com/dashboard
 ```
+
 ### Error Response
 
 ```json
