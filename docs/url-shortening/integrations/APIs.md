@@ -14,14 +14,16 @@ The following header parameters are required across all APIs:
 
 ## List of APIs
 
-1. [short  Url](#add-url)
-2. [Get Url info](#get-url-info)
-3. [Get Url](#get-url)
+1. [Shorten URL](#add-url)
+2. [Get URL info](#get-url-info)
+3. [Get URL](#get-url)
 
-# Short  Url
 
-- This API creates a new short url for the user.
-- The url must be valid and secure.
+
+# Shorten URL
+
+- This API creates a new short URL for the user.
+- The URL must be valid and secure.
 - A unique short code is automatically generated.
 
 ### Endpoint
@@ -50,9 +52,9 @@ POST /v1/urls
 {
   "success": true,
   "code": 200,
-  "message": "Url shortening done!",
+  "message": "URLshortening done!",
   "data": {
-    "url_code": "https://short.url/fx82nk",
+    "short_url": "https://short.url/fx82nk",
     "expires_at": "2024-07-30T14:30:00.123456"
   }
 }
@@ -64,7 +66,7 @@ POST /v1/urls
 {
   "success": false,
   "code": 400,
-  "message": "Url must be valid"
+  "message": "URL must be valid"
 }
 ```
 
@@ -80,11 +82,12 @@ POST /v1/urls
 
 ---
 
-## Get  Url info
+## Get URL Info
 
 - This API returns basic information about any short URL
 
-### End Point
+
+### EndPoint
 
 ```http request
 GET /v1/urls
@@ -102,7 +105,7 @@ GET /v1/urls
   "message": "",
   "data": [
     {
-      "code": "https://short.url/fx82nk",
+      "short_url": "https://short.url/fx82nk",
       "target_url": "www.google.com",
       "expires_at": "2024-07-30T14:30:00.123456",
       "clicks": 1
@@ -129,7 +132,9 @@ GET /v1/urls
 
 ---
 
-## Get Url
+
+
+## Get URL
 
 - This API visit a short URL and redirected user to the original website
 
@@ -158,6 +163,6 @@ Location: https://example.com/dashboard
 {
   "success": false,
   "code": 403,
-  "message": "Sorry, url not found"
+  "message": "Sorry, URL not found"
 }
 ```
