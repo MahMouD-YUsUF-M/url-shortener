@@ -3,8 +3,7 @@ from http import HTTPStatus
 
 class ServerException(Exception):
     def __init__(
-            self, message=None, error_code=None, status_code: HTTPStatus = HTTPStatus.INTERNAL_SERVER_ERROR, *,
-            context=None
+        self, message=None, error_code=None, status_code: HTTPStatus = HTTPStatus.INTERNAL_SERVER_ERROR, *, context=None
     ):
         self.message = message
         self.error_code = error_code
@@ -15,7 +14,7 @@ class ServerException(Exception):
 
 class ClientException(Exception):
     def __init__(
-            self, message=None, error_code=None, status_code: HTTPStatus = HTTPStatus.BAD_REQUEST, *, context=None
+        self, message=None, error_code=None, status_code: HTTPStatus = HTTPStatus.BAD_REQUEST, *, context=None
     ):
         self.message = message
         self.error_code = error_code

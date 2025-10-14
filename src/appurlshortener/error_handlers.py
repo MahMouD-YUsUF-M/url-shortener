@@ -14,11 +14,11 @@ from starlette.responses import JSONResponse
 
 
 def generate_custom_exception_handler(
-        status_code: int,
-        *,
-        client_error_message: typing.Union[str, typing.Callable[[Exception], str]] = str,
-        include_traceback: bool = False,
-        expose_exception_message: bool = False,
+    status_code: int,
+    *,
+    client_error_message: typing.Union[str, typing.Callable[[Exception], str]] = str,
+    include_traceback: bool = False,
+    expose_exception_message: bool = False,
 ):
     def err_handler(request: Request, exception: Exception) -> JSONResponse:
         if expose_exception_message and hasattr(exception, "message") and exception.message:
