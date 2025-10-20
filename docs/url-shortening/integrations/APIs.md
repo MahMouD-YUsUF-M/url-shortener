@@ -27,7 +27,7 @@ The following header parameters are required across all APIs:
 - A unique short code is automatically generated.
 
 ### Endpoint
-
+ 
 ```http request
 POST /v1/urls
 ```
