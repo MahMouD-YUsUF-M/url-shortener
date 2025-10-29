@@ -23,3 +23,10 @@ def shorten_url(msg: domain.url.AddUrl, ctx: RequestContext = Depends(get_reques
 
     return ShortenUrlResponse(success=True, data=short_url_info)
 
+
+@router.get('/')
+def get_urls(ctx: RequestContext = Depends(get_request_context)):
+    with UrlShortenerSession() as session:
+        urls = shorten_url_get_format(domain.url.GetUrl().execute(ctx, session))
+
+    return ShortenUrlGetResponse(success=True, data=urls)
