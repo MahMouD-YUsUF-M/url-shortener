@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from liburl_shortener.data import engine_url_shortener
+from liburlshortener.data import engine_urlshortener
 from libutil import util
 from sqlalchemy import text, types
 from sqlalchemy.dialects import mysql
@@ -9,18 +9,18 @@ Base = declarative_base()
 
 
 def create_all():
-    Base.metadata.create_all(engine_url_shortener)
+    Base.metadata.create_all(engine_urlshortener)
 
 
 def recreate_all():
     assert util.IS_DEV, 'must be dev'
-    Base.metadata.drop_all(engine_url_shortener)
-    Base.metadata.create_all(engine_url_shortener)
+    Base.metadata.drop_all(engine_urlshortener)
+    Base.metadata.create_all(engine_urlshortener)
 
 
 class Model(Base):
     __abstract__ = True
-    __bind_key__ = 'url_shortener'
+    __bind_key__ = 'urlshortener'
 
 
 TINYINT = mysql.TINYINT(unsigned=True)
@@ -51,9 +51,9 @@ class User(Model):
 class Url(Model):
     __tablename__ = 'url'
     id_url = sa.Column(BIGINT, primary_key=True)
-    url_code = sa.Column(sa.String(7), nullable=False, unique=True)
+    url_code = sa.Column(sa.String(9), nullable=False, unique=True)
 
-    target_url = sa.Column(sa.String(2048), nullable=False, index=True)
+    target_url = sa.Column(sa.String(2048), nullable=False)
     id_user = sa.Column(BIGINT, nullable=False, index=True)
     expires_at = sa.Column(types.TIMESTAMP, nullable=False, index=True)
 
