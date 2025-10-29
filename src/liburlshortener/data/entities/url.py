@@ -37,3 +37,20 @@ WHERE u.id_user = :id_user
         id_user=id_user,
     ).dicts()
 
+
+def get_url_by_code(conn, id_user, url_code):
+    return sql(
+        conn,
+        '''
+        SELECT target_url ,
+               expires_at,
+               id_url
+            
+        FROM url
+        
+        WHERE url_code = :url_code 
+            AND id_user = :id_user
+        ''',
+        url_code=url_code,
+        id_user=id_user,
+    ).dict()
