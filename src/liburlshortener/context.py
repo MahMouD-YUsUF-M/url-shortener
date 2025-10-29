@@ -4,14 +4,14 @@ from libutil.util import BaseModel
 
 
 class RequestContext(BaseModel):
-    # url_shortener service context attributes
+    # urlshortener service context attributes
     id_user: Optional[int] = None
     user_code: str = None
 
     @staticmethod
-    def from_url_shortener_service(user_code, **kwargs):
+    def from_urlshortener_service(user_code, **kwargs):
         """
-        Creates a RequestContext for requests coming from the url_shortener service.
+        Creates a RequestContext for requests coming from the urlshortener service.
         Add more service-specific factory methods as needed:
         - from_auth_service()
         - from_payment_service()
@@ -19,11 +19,11 @@ class RequestContext(BaseModel):
         etc.
         """
 
-        from liburl_shortener.data import engine_url_shortener, entities
+        from liburlshortener.data import engine_urlshortener, entities
 
-        id_user = entities.user.get_id_by_code(engine_url_shortener, user_code)
+        id_user = entities.user.get_id_by_code(engine_urlshortener, user_code)
         if not id_user:
-            id_user = entities.user.insert_user(engine_url_shortener, user_code)
+            id_user = entities.user.insert_user(engine_urlshortener, user_code)
 
         kwargs.update(
             {

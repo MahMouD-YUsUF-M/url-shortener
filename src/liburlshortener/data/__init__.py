@@ -1,5 +1,5 @@
 from libutil.engines import get_engine
 
-engine_url_shortener = get_engine('url_shortener')
+engine_urlshortener = get_engine('urlshortener')
 
 from . import models

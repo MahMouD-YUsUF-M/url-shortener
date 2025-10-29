@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network: host  # ← Add this line
     restart: always
     networks:
       - shared-network

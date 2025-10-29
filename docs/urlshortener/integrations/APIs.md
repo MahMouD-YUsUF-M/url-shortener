@@ -52,7 +52,7 @@ POST /v1/urls
 {
   "success": true,
   "code": 200,
-  "message": "URLshortening done!",
+  "message": "URL shortening done!",
   "data": {
     "short_url": "https://short.url/fx82nk",
     "expires_at": "2024-07-30T14:30:00.123456"
@@ -111,7 +111,7 @@ GET /v1/urls
       "clicks": 1
     },
     {
-      "code": "dsg33asf",
+      "short_url": "https://short.url/fx82nk",
       "target_url": "www.atcoder.com",
       "expires_at": "2024-07-30T14:30:00.123456",
       "clicks": 6
