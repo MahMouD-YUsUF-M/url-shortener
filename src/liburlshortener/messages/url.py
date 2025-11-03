@@ -31,7 +31,7 @@ class ShortenUrlGetResponse(ResponseBaseModel):
 
 def shorten_url_format(row, request):
     short_url_info = ShortUrl(
-        short_url=str(request.url_for('redirect_url', short_url=row["url_code"])),
+        short_url=str(request.url_for('redirect_url', short_code=row["url_code"])),
         expire_at=(row["expires_at"]),
     )
     return short_url_info
@@ -47,7 +47,7 @@ def shorten_url_get_format(rows, request):
                 expire_at=short_url_info["expires_at"],
                 target_url=short_url_info["target_url"],
                 clicks=short_url_info["click_count"],
-                short_url=str(request.url_for('redirect_url', short_url=short_url_info["url_code"])),
+                short_url=str(request.url_for('redirect_url', short_code=short_url_info["url_code"])),
             )
         )
 

@@ -60,8 +60,8 @@ class GetUrls(BaseModel):
 class GetUrlByCode(BaseModel):
     short_code: str
 
-    def execute(self, ctx, session):
-        url_info = entities.url.get_url_by_code(session.conn, ctx.id_user, self.short_code)
+    def execute(self, session):
+        url_info = entities.url.get_url_by_code(session.conn, self.short_code)
 
         if url_info is None:
             raise UrlValidationException(f"Invalid url code: {self.short_code}")

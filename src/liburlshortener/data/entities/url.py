@@ -44,7 +44,7 @@ GROUP BY u.id_url, u.url_code, u.expires_at, u.target_url;      ''',
     ).dicts()
 
 
-def get_url_by_code(conn, id_user, url_code):
+def get_url_by_code(conn, url_code):
     return sql(
         conn,
         '''
@@ -55,8 +55,6 @@ SELECT target_url,
 FROM url
 
 WHERE url_code = :url_code
-  AND id_user = :id_user
         ''',
         url_code=url_code,
-        id_user=id_user,
     ).dict()

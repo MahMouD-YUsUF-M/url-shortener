@@ -32,10 +32,9 @@ def get_urls(request: Request, ctx: RequestContext = Depends(get_request_context
     return ShortenUrlGetResponse(success=True, data=urls)
 
 
-@router.get('/{short_url}', name='redirect_url')
-def redirect_url(msg: domain.url.GetUrlByCode = Depends(), ctx: RequestContext = Depends(get_request_context)):
+@router.get('/{short_code}', name='redirect_url')
+def redirect_url(msg: domain.url.GetUrlByCode = Depends()):
     with UrlShortenerSession() as session:
-        url_info = msg.execute(ctx, session)
+        url_info = msg.execute(session)
         domain.click.AddClick().execute(session, url_info['id_url'])
-
-        return RedirectResponse(url_info['target_url'])
+        return RedirectResponse(url_info['target_url'], status_code=307)
