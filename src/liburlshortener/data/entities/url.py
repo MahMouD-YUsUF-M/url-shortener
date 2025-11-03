@@ -12,28 +12,34 @@ def insert_url(conn, id_user, url_code, expires_at, target_url):
     return {"url_code": url_code, 'expires_at': expires_at}
 
 
+def check_url_code(conn, id_user, url_code):
+    return sql(
+        conn,
+        '''
+SELECT EXISTS (SELECT 1
+               FROM url
+               WHERE id_user = :id_user
+                 AND url_code = :url_code)
+               ''',
+        id_user=id_user,
+        url_code=url_code,
+    )
+
+
 def get_all_user_urls(conn, id_user):
     return sql(
         conn,
         '''
-      SELECT u.url_code,
+SELECT u.url_code,
        u.expires_at,
        u.target_url,
        u.id_url,
-       COALESCE(c.click_count, 0) as click_count
+       COALESCE(COUNT(c.id_click), 0) as click_count
 FROM url AS u
-         LEFT JOIN (SELECT id_url, COUNT(*) as click_count
-                    FROM click
-                    WHERE id_url IN 
-                          (SELECT id_url
-                                     FROM url
-                                     WHERE id_user = :id_user
-                                       AND expires_at > NOW())
-                    GROUP BY id_url) 
-                                    AS c ON c.id_url = u.id_url
+         LEFT JOIN click AS c ON c.id_url = u.id_url
 WHERE u.id_user = :id_user
-  AND u.expires_at > NOW();
-        ''',
+  AND u.expires_at > NOW()
+GROUP BY u.id_url, u.url_code, u.expires_at, u.target_url;      ''',
         id_user=id_user,
     ).dicts()
 
@@ -42,14 +48,14 @@ def get_url_by_code(conn, id_user, url_code):
     return sql(
         conn,
         '''
-        SELECT target_url ,
-               expires_at,
-               id_url
-            
-        FROM url
-        
-        WHERE url_code = :url_code 
-            AND id_user = :id_user
+SELECT target_url,
+       expires_at,
+       id_url
+
+FROM url
+
+WHERE url_code = :url_code
+  AND id_user = :id_user
         ''',
         url_code=url_code,
         id_user=id_user,

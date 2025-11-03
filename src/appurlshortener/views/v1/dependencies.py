@@ -6,7 +6,7 @@ from liburlshortener.context import RequestContext
 
 def get_request_context(
     user_code: str = Header(
-        alias='X-User-Code',
+        alias='X-Guest-Code',
         default=None,
         include_in_schema=True,
     )

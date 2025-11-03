@@ -3,7 +3,6 @@ from typing import List
 
 from liburlshortener.messages.common import ResponseBaseModel
 from libutil.util import BaseModel
-from liburlshortener.messages import constants
 
 
 class ShortUrl(BaseModel):
@@ -19,7 +18,7 @@ class ShortUrlGet(BaseModel):
 
 
 class ShortUrlGetList(BaseModel):
-    ShortUrl: List[ShortUrlGet]
+    shorturls: List[ShortUrlGet]
 
 
 class ShortenUrlResponse(ResponseBaseModel):
@@ -30,26 +29,25 @@ class ShortenUrlGetResponse(ResponseBaseModel):
     data: ShortUrlGetList
 
 
-def shorten_url_format(row):
+def shorten_url_format(row, request):
     short_url_info = ShortUrl(
-        short_url=constants.Prefix_for_url + row["url_code"],
+        short_url=str(request.url_for('redirect_url', short_url=row["url_code"])),
         expire_at=(row["expires_at"]),
     )
     return short_url_info
 
 
-def shorten_url_get_format(row):
-    temp = []
+def shorten_url_get_format(rows, request):
 
-    short_urls_info = ShortUrlGetList(ShortUrl=temp)
+    short_urls_info = ShortUrlGetList(shorturls=[])
 
-    for short_url_info in row:
-        short_urls_info.ShortUrl.append(
+    for short_url_info in rows:
+        short_urls_info.shorturls.append(
             ShortUrlGet(
                 expire_at=short_url_info["expires_at"],
                 target_url=short_url_info["target_url"],
                 clicks=short_url_info["click_count"],
-                short_url=constants.Prefix_for_url + short_url_info["url_code"],
+                short_url=str(request.url_for('redirect_url', short_url=short_url_info["url_code"])),
             )
         )
 

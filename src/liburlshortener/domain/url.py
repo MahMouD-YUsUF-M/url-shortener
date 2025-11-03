@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
+
+from astroid import While
 from pydantic import field_validator
+from urllib.parse import urlparse
 
 from liburlshortener.exceptions import UrlValidationException
 from libutil.util import BaseModel
 from liburlshortener.data import entities
-import validators
 from liburlshortener.domain import constants
 import random
 import string
@@ -12,7 +14,7 @@ import string
 
 def generate_url_code():
     valid_chars = string.ascii_letters + string.digits
-    url_code = ''.join(random.choice(valid_chars) for _ in range(8))
+    url_code = ''.join(random.choice(valid_chars) for _ in range(constants.URL_CODE_LENGTH))
     return url_code
 
 
@@ -21,12 +23,20 @@ class AddUrl(BaseModel):
 
     @field_validator('target_url')
     def validate_target_url(cls, url: str) -> str:
-        if not validators.url(url):
-            raise ValueError('Invalid URL')
+        parsed_url = urlparse(url)
+
+        if not parsed_url.scheme or not parsed_url.netloc:
+            raise UrlValidationException(f'Invalid url: {url}')
+
+        if parsed_url.scheme not in ['http', 'https']:
+            raise ValueError('URL scheme must be http or https')
+
         return url
 
     def execute(self, ctx, session):
         url_code = generate_url_code()
+        if entities.url.check_url_code(session.conn, ctx.id_user, url_code):
+            url_code = generate_url_code()
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)
         url_row = entities.url.insert_url(
@@ -39,7 +49,7 @@ class AddUrl(BaseModel):
         return url_row
 
 
-class GetUrl(BaseModel):
+class GetUrls(BaseModel):
 
     def execute(self, ctx, session):
         urls = entities.url.get_all_user_urls(session.conn, ctx.id_user)

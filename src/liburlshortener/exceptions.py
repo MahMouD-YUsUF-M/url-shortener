@@ -38,4 +38,10 @@ class ForbiddenActionException(ClientException):
 
 
 class UrlValidationException(ClientException):
-    pass
+    def __init__(self, message="URL not found", *, context=None):
+        super().__init__(
+            message=message,
+            error_code=404,
+            status_code=HTTPStatus.NOT_FOUND,
+            context=context,
+        )
