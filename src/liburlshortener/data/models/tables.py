@@ -1,9 +1,10 @@
 import sqlalchemy as sa
-from liburlshortener.data import engine_urlshortener
-from libutil import util
 from sqlalchemy import text, types
 from sqlalchemy.dialects import mysql
 from sqlalchemy.ext.declarative import declarative_base
+
+from liburlshortener.data import engine_urlshortener
+from libutil import util
 
 Base = declarative_base()
 
@@ -36,7 +37,7 @@ class User(Model):
     __tablename__ = 'user'
 
     id_user = sa.Column(BIGINT, primary_key=True)
-    user_code = sa.Column(sa.String(50), nullable=False, unique=True)
+    guest_code = sa.Column(sa.String(50), nullable=False, unique=True)
     is_guest = sa.Column(sa.Boolean, nullable=False)
 
     created_at = sa.Column(types.TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'), nullable=False)

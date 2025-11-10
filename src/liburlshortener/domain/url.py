@@ -1,15 +1,14 @@
-from datetime import datetime, timedelta
-
-from astroid import While
-from pydantic import field_validator
-from urllib.parse import urlparse
-
-from liburlshortener.exceptions import UrlValidationException
-from libutil.util import BaseModel
-from liburlshortener.data import entities
-from liburlshortener.domain import constants
 import random
 import string
+from datetime import datetime, timedelta
+from urllib.parse import urlparse
+
+from pydantic import field_validator
+
+from liburlshortener.data import entities
+from liburlshortener.domain import constants
+from liburlshortener.exceptions import UrlNonExistingException
+from libutil.util import BaseModel
 
 
 def generate_url_code():
@@ -26,7 +25,7 @@ class AddUrl(BaseModel):
         parsed_url = urlparse(url)
 
         if not parsed_url.scheme or not parsed_url.netloc:
-            raise UrlValidationException(f'Invalid url: {url}')
+            raise ValueError('URL is not valid')
 
         if parsed_url.scheme not in ['http', 'https']:
             raise ValueError('URL scheme must be http or https')
@@ -35,7 +34,7 @@ class AddUrl(BaseModel):
 
     def execute(self, ctx, session):
         url_code = generate_url_code()
-        if entities.url.check_url_code(session.conn, ctx.id_user, url_code):
+        while entities.url.check_url_code_uniqueness(session.conn, ctx.id_user):
             url_code = generate_url_code()
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)
@@ -64,9 +63,9 @@ class GetUrlByCode(BaseModel):
         url_info = entities.url.get_url_by_code(session.conn, self.short_code)
 
         if url_info is None:
-            raise UrlValidationException(f"Invalid url code: {self.short_code}")
+            raise UrlNonExistingException(f"Invalid url code: {self.short_code}")
 
         if url_info['expires_at'] < datetime.now():
-            raise UrlValidationException(f"Short code {self.short_code} expired")
+            raise UrlNonExistingException(f"Short code {self.short_code} expired")
 
         return {'target_url': url_info['target_url'], 'id_url': url_info['id_url']}

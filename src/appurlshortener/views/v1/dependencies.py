@@ -5,13 +5,13 @@ from liburlshortener.context import RequestContext
 
 
 def get_request_context(
-    user_code: str = Header(
+    guest_code: str = Header(
         alias='X-Guest-Code',
         default=None,
         include_in_schema=True,
     )
 ):
-    return RequestContext.from_urlshortener_service(user_code=user_code)
+    return RequestContext.from_urlshortener_service(guest_code=guest_code)
 
 
 def get_some_header(required: bool = True):

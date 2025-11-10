@@ -5,6 +5,11 @@ from liburlshortener.messages.common import ResponseBaseModel
 from libutil.util import BaseModel
 
 
+# ==========================
+# Models
+# ==========================
+
+
 class ShortUrl(BaseModel):
     short_url: str
     expire_at: datetime
@@ -18,15 +23,25 @@ class ShortUrlGet(BaseModel):
 
 
 class ShortUrlGetList(BaseModel):
-    shorturls: List[ShortUrlGet]
+    short_urls: List[ShortUrlGet]
+
+
+# ==========================
+# Response Models
+# ==========================
 
 
 class ShortenUrlResponse(ResponseBaseModel):
     data: ShortUrl
 
 
-class ShortenUrlGetResponse(ResponseBaseModel):
+class ShortenerUrlsGetResponse(ResponseBaseModel):
     data: ShortUrlGetList
+
+
+# ==========================
+# Helper Functions
+# ==========================
 
 
 def shorten_url_format(row, request):
@@ -38,11 +53,10 @@ def shorten_url_format(row, request):
 
 
 def shorten_url_get_format(rows, request):
-
-    short_urls_info = ShortUrlGetList(shorturls=[])
+    short_urls_info = ShortUrlGetList(short_urls=[])
 
     for short_url_info in rows:
-        short_urls_info.shorturls.append(
+        short_urls_info.short_urls.append(
             ShortUrlGet(
                 expire_at=short_url_info["expires_at"],
                 target_url=short_url_info["target_url"],

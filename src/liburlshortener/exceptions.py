@@ -37,7 +37,7 @@ class ForbiddenActionException(ClientException):
         super().__init__(message=self.message, status_code=self.status_code)
 
 
-class UrlValidationException(ClientException):
+class UrlNonExistingException(ClientException):
     def __init__(self, message="URL not found", *, context=None):
         super().__init__(
             message=message,

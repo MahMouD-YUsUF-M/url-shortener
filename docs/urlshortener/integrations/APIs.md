@@ -18,8 +18,6 @@ The following header parameters are required across all APIs:
 2. [Get URL info](#get-url-info)
 3. [Get URL](#get-url)
 
-
-
 # Shorten URL
 
 - This API creates a new short URL for the user.
@@ -27,7 +25,7 @@ The following header parameters are required across all APIs:
 - A unique short code is automatically generated.
 
 ### Endpoint
- 
+
 ```http request
 POST /v1/urls
 ```
@@ -86,7 +84,6 @@ POST /v1/urls
 
 - This API returns basic information about any short URL
 
-
 ### EndPoint
 
 ```http request
@@ -131,8 +128,6 @@ GET /v1/urls
 ```
 
 ---
-
-
 
 ## Get URL
 

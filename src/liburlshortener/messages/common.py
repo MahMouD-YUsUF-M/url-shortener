@@ -1,7 +1,8 @@
 from typing import Optional, List, Union
 
-from libutil.util import BaseModel
 from pydantic import Field
+
+from libutil.util import BaseModel
 
 
 class ResponseBaseModel(BaseModel):
