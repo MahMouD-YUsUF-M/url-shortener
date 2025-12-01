@@ -17,7 +17,7 @@ class ShortUrl(BaseModel):
 
 class ShortUrlGet(BaseModel):
     short_url: str
-    expire_at: datetime
+    expires_at: datetime
     target_url: str
     clicks: int
 
@@ -36,7 +36,7 @@ class ShortenUrlResponse(ResponseBaseModel):
 
 
 class ShortenerUrlsGetResponse(ResponseBaseModel):
-    data: ShortUrlGetList
+    data: List[ShortUrlGet]
 
 
 # ==========================
@@ -53,12 +53,12 @@ def shorten_url_format(row, request):
 
 
 def shorten_url_get_format(rows, request):
-    short_urls_info = ShortUrlGetList(short_urls=[])
+    short_urls_info = []
 
     for short_url_info in rows:
-        short_urls_info.short_urls.append(
+        short_urls_info.append(
             ShortUrlGet(
-                expire_at=short_url_info["expires_at"],
+                expires_at=short_url_info["expires_at"],
                 target_url=short_url_info["target_url"],
                 clicks=short_url_info["click_count"],
                 short_url=str(request.url_for('redirect_url', short_code=short_url_info["url_code"])),

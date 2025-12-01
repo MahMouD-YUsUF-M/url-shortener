@@ -12,7 +12,7 @@ def insert_url(conn, id_user, url_code, expires_at, target_url):
     return {"url_code": url_code, 'expires_at': expires_at}
 
 
-def check_url_code_uniqueness(conn, url_code):
+def check_url_code_exists(conn, url_code):
     code = sql(
         conn,
         '''
@@ -21,8 +21,9 @@ def check_url_code_uniqueness(conn, url_code):
         WHERE url_code = :url_code
         ''',
         url_code=url_code,
-    ).scalars()
-    return bool(code)
+    ).dict()
+
+    return code is not None
 
 
 def get_all_user_urls(conn, id_user):
