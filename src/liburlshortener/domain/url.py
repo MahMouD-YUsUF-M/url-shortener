@@ -35,11 +35,13 @@ class AddUrl(BaseModel):
     def execute(self, ctx, session):
         url_code = generate_url_code()
         for i in range(1, 5):
-            if entities.url.check_url_code_exists(session.conn, ctx.id_user):
-                url_code = generate_url_code()
+            url_code = generate_url_code()
+            if not entities.url.check_url_code_exists(session.conn, ctx.id_user):
                 break
-            else:
-                print("حط طحينة")
+
+        if entities.url.check_url_code_exists(session.conn, ctx.id_user):
+            raise UrlNonExistingException("Can't short {} url".format(self.target_url))
+
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)
         url_row = entities.url.insert_url(

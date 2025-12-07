@@ -22,10 +22,6 @@ class ShortUrlGet(BaseModel):
     clicks: int
 
 
-class ShortUrlGetList(BaseModel):
-    short_urls: List[ShortUrlGet]
-
-
 # ==========================
 # Response Models
 # ==========================

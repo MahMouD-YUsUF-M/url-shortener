@@ -21,7 +21,7 @@ def check_url_code_exists(conn, url_code):
         WHERE url_code = :url_code
         ''',
         url_code=url_code,
-    ).dict()
+    ).scaler()
 
     return code is not None
 
