@@ -7,7 +7,7 @@ from pydantic import field_validator
 
 from liburlshortener.data import entities
 from liburlshortener.domain import constants
-from liburlshortener.exceptions import UrlNonExistingException, CodeNotFoundException
+from liburlshortener.exceptions import UrlNotFoundException, CodeNotGeneratedException
 from libutil.util import BaseModel
 
 
@@ -33,17 +33,17 @@ class AddUrl(BaseModel):
         return url
 
     def execute(self, ctx, session):
-        is_unique_code = False
+        is_used_code = False
         url_code = ""
 
         for i in range(1, 5):
             url_code = generate_url_code()
-            is_unique_code = entities.url.is_url_code_exists(conn=session.conn, url_code=url_code)
-            if not is_unique_code:
+            is_used_code = entities.url.is_url_code_exists(conn=session.conn, url_code=url_code)
+            if not is_used_code:
                 break
 
-        if is_unique_code:
-            raise CodeNotFoundException("Can't generate short url ")
+        if is_used_code:
+            raise CodeNotGeneratedException("Can't generate short url ")
 
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)
@@ -72,9 +72,9 @@ class GetUrlByCode(BaseModel):
         url_info = entities.url.get_url_by_code(session.conn, self.short_code)
 
         if url_info is None:
-            raise UrlNonExistingException(f"Invalid url code: {self.short_code}")
+            raise UrlNotFoundException(f"Invalid url code: {self.short_code}")
 
         if url_info['expires_at'] < datetime.now():
-            raise UrlNonExistingException(f"Short code {self.short_code} expired")
+            raise UrlNotFoundException(f"Short code {self.short_code} expired")
 
         return {'target_url': url_info['target_url'], 'id_url': url_info['id_url']}

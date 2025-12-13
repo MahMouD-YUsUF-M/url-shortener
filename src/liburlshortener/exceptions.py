@@ -37,7 +37,7 @@ class ForbiddenActionException(ClientException):
         super().__init__(message=self.message, status_code=self.status_code)
 
 
-class UrlNonExistingException(ClientException):
+class UrlNotFoundException(ClientException):
     def __init__(self, message="URL not found", *, context=None):
         super().__init__(
             message=message,
@@ -47,7 +47,7 @@ class UrlNonExistingException(ClientException):
         )
 
 
-class CodeNotFoundException(ClientException):
+class CodeNotGeneratedException(ClientException):
     def __init__(self, message="There is no a unique code", *, context=None):
         super().__init__(
             message=message,
