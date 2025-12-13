@@ -12,7 +12,7 @@ def insert_url(conn, id_user, url_code, expires_at, target_url):
     return {"url_code": url_code, 'expires_at': expires_at}
 
 
-def check_url_code_exists(conn, url_code):
+def is_url_code_exists(conn, url_code):
     code = sql(
         conn,
         '''

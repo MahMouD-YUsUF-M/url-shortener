@@ -45,3 +45,13 @@ class UrlNonExistingException(ClientException):
             status_code=HTTPStatus.NOT_FOUND,
             context=context,
         )
+
+
+class CodeNotFoundException(ClientException):
+    def __init__(self, message="There is no a unique code", *, context=None):
+        super().__init__(
+            message=message,
+            error_code=404,
+            status_code=HTTPStatus.NOT_FOUND,
+            context=context,
+        )

@@ -7,7 +7,7 @@ from pydantic import field_validator
 
 from liburlshortener.data import entities
 from liburlshortener.domain import constants
-from liburlshortener.exceptions import UrlNonExistingException
+from liburlshortener.exceptions import UrlNonExistingException, CodeNotFoundException
 from libutil.util import BaseModel
 
 
@@ -33,17 +33,17 @@ class AddUrl(BaseModel):
         return url
 
     def execute(self, ctx, session):
-        code_exist = False
+        is_unique_code = False
         url_code = ""
 
         for i in range(1, 5):
             url_code = generate_url_code()
-            code_exist = entities.url.check_url_code_exists(conn=session.conn, url_code=url_code)
-            if not code_exist:
+            is_unique_code = entities.url.is_url_code_exists(conn=session.conn, url_code=url_code)
+            if not is_unique_code:
                 break
 
-        if code_exist:
-            raise UrlNonExistingException("Can't short {} url".format(self.target_url))
+        if is_unique_code:
+            raise CodeNotFoundException("Can't generate short url ")
 
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)
