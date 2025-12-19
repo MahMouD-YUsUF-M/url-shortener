@@ -7,7 +7,7 @@ from pydantic import field_validator
 
 from liburlshortener.data import entities
 from liburlshortener.domain import constants
-from liburlshortener.exceptions import UrlNotFoundException, CodeGeneratedFailedException
+from liburlshortener.exceptions import UrlNotFoundException, CodeGenerationFailedException
 from libutil.util import BaseModel
 
 
@@ -43,7 +43,7 @@ class AddUrl(BaseModel):
                 break
 
         if not is_unique_code:
-            raise CodeGeneratedFailedException("Can't generate short url")
+            raise CodeGenerationFailedException("Can't generate short url")
 
         target_url = self.target_url
         expires_at = datetime.now() + timedelta(days=constants.URL_EXPIRATION_DAYS)

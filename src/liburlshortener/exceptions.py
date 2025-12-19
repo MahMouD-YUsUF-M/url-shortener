@@ -47,7 +47,7 @@ class UrlNotFoundException(ClientException):
         )
 
 
-class CodeGeneratedFailedException(ClientException):
+class CodeGenerationFailedException(ClientException):
     def __init__(self, message="There is no a unique code", *, context=None):
         super().__init__(
             message=message,
